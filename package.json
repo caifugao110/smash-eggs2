@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8080",
-    "voice": "node gen_phrases.mjs && python gen_voice.py"
+    "voice": "node scripts/gen_phrases.mjs && python scripts/gen_voice.py"
   },
   "keywords": [
     "game",

@@ -59,11 +59,14 @@ npx --yes serve -l 8080 .
 
 ```
 smash-eggs2/
-├─ index.html        # 游戏本体（HTML + CSS + JS 单文件）
-├─ v/                # 预生成真人语音片段 + manifest.js
-├─ gen_phrases.mjs   # 从 index.html 提取朗读文案
-├─ gen_voice.py      # 用 edge-tts 批量生成语音
-├─ LICENSE           # MIT
+├─ index.html          # 游戏本体（HTML + CSS + JS 单文件）
+├─ assets/
+│  └─ voice/           # 预生成真人语音片段 + manifest.js
+├─ scripts/
+│  ├─ gen_phrases.mjs  # 从 index.html 提取朗读文案
+│  └─ gen_voice.py     # 用 edge-tts 批量生成语音
+├─ package.json
+├─ LICENSE             # MIT
 └─ README.md
 ```
 
@@ -73,9 +76,11 @@ smash-eggs2/
 
 ```bash
 pip install edge-tts
-node gen_phrases.mjs     # 生成 phrases.json
-python gen_voice.py      # 生成 v/*.mp3 与 v/manifest.js
+node scripts/gen_phrases.mjs     # 生成 phrases.json
+python scripts/gen_voice.py      # 生成 assets/voice/*.mp3 与 assets/voice/manifest.js
 ```
+
+也可以直接执行 `npm run voice` 完成以上两步。
 
 默认音色 `zh-CN-XiaoxiaoNeural`，语速 `-8%`，可在 `gen_voice.py` 中修改。
 

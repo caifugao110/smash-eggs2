@@ -3,8 +3,8 @@ import edge_tts
 
 VOICE = 'zh-CN-XiaoxiaoNeural'
 RATE = '-8%'
-BASE = os.path.dirname(os.path.abspath(__file__))
-VD = os.path.join(BASE, 'v')
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+VD = os.path.join(BASE, 'assets', 'voice')
 os.makedirs(VD, exist_ok=True)
 phrases = json.load(open(os.path.join(BASE, 'phrases.json'), encoding='utf-8'))
 sem = asyncio.Semaphore(4)
@@ -30,7 +30,7 @@ async def main():
     failed = []
     for i, key, ok in results:
         if ok:
-            manifest[key] = f'v/{i:04d}.mp3'
+            manifest[key] = f'assets/voice/{i:04d}.mp3'
         else:
             failed.append(key)
     with open(os.path.join(VD, 'manifest.js'), 'w', encoding='utf-8') as f:

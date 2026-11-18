@@ -1,5 +1,5 @@
 import fs from 'fs';
-const html = fs.readFileSync(new URL('./index.html', import.meta.url), 'utf8');
+const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const m = html.match(/const WORLDS = (\[[\s\S]*?\]);\r?\nconst ALL_CHARS/);
 if (!m) { console.error('WORLDS not found'); process.exit(1); }
 const WORLDS = eval(m[1]);
@@ -28,5 +28,5 @@ phrases.push({ key: 'sys_perfect', text: '完美通关！你太厉害啦！' });
 phrases.push({ key: 'sys_clear', text: '闯关成功！收集到新的字宝宝啦！' });
 phrases.push({ key: 'conn_zheshi', text: '这是' });
 phrases.push({ key: 'conn_zaizhaozhao', text: '再找找，' });
-fs.writeFileSync(new URL('./phrases.json', import.meta.url), JSON.stringify(phrases, null, 0));
+fs.writeFileSync(new URL('../phrases.json', import.meta.url), JSON.stringify(phrases, null, 0));
 console.log('phrases:', phrases.length, 'unique chars:', seen.size);
