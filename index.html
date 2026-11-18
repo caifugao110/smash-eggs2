@@ -2,7 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFB020">
+<meta name="description" content="砸金蛋·认汉字 — 面向 3-6 岁小朋友的汉字启蒙小游戏，140 个常用汉字、68 个关卡、真人语音、触屏互动。">
 <title>砸金蛋 · 认汉字 — 宝宝汉字大冒险</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -24,10 +26,10 @@
 html,body{height:100%}
 body{
   font-family:var(--ui-font); color:var(--ink);
-  overflow:hidden; user-select:none; -webkit-user-select:none; touch-action:manipulation;
+  overflow:hidden; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; touch-action:manipulation;
   background:var(--cream);
 }
-button{font-family:var(--ui-font);border:none;cursor:pointer;color:var(--ink)}
+button{font-family:var(--ui-font);border:none;cursor:pointer;color:var(--ink);touch-action:manipulation}
 button:active{transform:scale(.94)}
 
 /* ---------- 背景世界 ---------- */
@@ -67,10 +69,12 @@ button:active{transform:scale(.94)}
 .big-btn.grape:active{box-shadow:0 2px 0 #65329F,0 6px 12px rgba(155,93,229,.28)}
 .big-btn.gold{background:linear-gradient(180deg,#FFCF5E,var(--gold) 55%,var(--gold-deep));box-shadow:0 6px 0 #B36A05,0 12px 22px rgba(232,137,12,.32);color:#5C3400;text-shadow:0 1px 0 rgba(255,255,255,.4)}
 .big-btn.gold:active{box-shadow:0 2px 0 #B36A05,0 6px 12px rgba(232,137,12,.28)}
+.big-btn.danger{background:linear-gradient(180deg,#FF8080,var(--danger) 55%,#D63A3A);box-shadow:0 6px 0 #B02E2E,0 12px 22px rgba(255,90,90,.32)}
+.big-btn.danger:active{box-shadow:0 2px 0 #B02E2E,0 6px 12px rgba(255,90,90,.28)}
 .big-btn.small{font-size:clamp(16px,2.6vw,20px);padding:10px 22px}
 
 .round-btn{width:52px;height:52px;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;
-  background:var(--paper);box-shadow:0 4px 0 #E4CFA8,0 8px 14px rgba(140,100,40,.18);border:3px solid #FFE1A8;}
+  background:var(--paper);box-shadow:0 4px 0 #E4CFA8,0 8px 14px rgba(140,100,40,.18);border:3px solid #FFE1A8;flex:none;}
 .round-btn:active{box-shadow:0 1px 0 #E4CFA8}
 
 /* 全局声音按钮 */
@@ -96,18 +100,29 @@ button:active{transform:scale(.94)}
 #home-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 #diff-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);border:3px dashed #F2C879;border-radius:999px;padding:7px 14px;flex-wrap:wrap;justify-content:center}
 #diff-row .lbl{font-size:16px;color:var(--ink-soft)}
-.diff-pill{padding:7px 16px;border-radius:999px;font-size:clamp(14px,2.3vw,18px);background:#FFF; border:3px solid #EAD9B4;color:var(--ink-soft);transition:.15s}
-.diff-pill.sel{background:linear-gradient(180deg,#FFE07A,var(--gold));border-color:var(--gold-deep);color:#5C3400;box-shadow:0 3px 0 #C77F08}
+.diff-pill,.opt-pill{padding:7px 16px;border-radius:999px;font-size:clamp(14px,2.3vw,18px);background:#FFF;border:3px solid #EAD9B4;color:var(--ink-soft);transition:.15s}
+.diff-pill.sel,.opt-pill.sel{background:linear-gradient(180deg,#FFE07A,var(--gold));border-color:var(--gold-deep);color:#5C3400;box-shadow:0 3px 0 #C77F08}
 
-/* ---------- 关卡地图 ---------- */
-#screen-map{padding-top:12px}
-.top-bar{width:100%;max-width:920px;display:flex;align-items:center;gap:12px;margin-bottom:10px;padding-right:120px}
+/* ---------- 顶栏 / 滚动区 ---------- */
+.top-bar{width:100%;max-width:920px;display:flex;align-items:center;gap:12px;margin-bottom:10px;padding-right:120px;flex:none}
 .top-bar h2{font-size:clamp(22px,4vw,32px);flex:1;text-align:center;color:#7A4A12;text-shadow:0 2px 0 #fff}
-#map-scroll{width:100%;max-width:920px;flex:1;min-height:0;overflow-y:auto;padding:6px 10px 30px;scrollbar-width:thin;scrollbar-color:var(--gold) #FFEBC4}
+.scroll-area{width:100%;max-width:920px;flex:1;min-height:0;overflow-y:auto;padding:6px 10px 30px;scrollbar-width:thin}
+#map-scroll{scrollbar-color:var(--gold) #FFEBC4}
 #map-scroll::-webkit-scrollbar{width:12px}
 #map-scroll::-webkit-scrollbar-track{background:#FFEBC4;border-radius:8px}
 #map-scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--sun),var(--gold));border-radius:8px;border:2px solid #FFEBC4}
 #map-scroll::-webkit-scrollbar-thumb:hover{background:var(--gold-deep)}
+#album-scroll{scrollbar-color:var(--grape) #EFE2FB}
+#album-scroll::-webkit-scrollbar{width:12px}
+#album-scroll::-webkit-scrollbar-track{background:#EFE2FB;border-radius:8px}
+#album-scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--pink),var(--grape));border-radius:8px;border:2px solid #EFE2FB}
+#settings-scroll{scrollbar-color:var(--teal) #D6F5EE}
+#settings-scroll::-webkit-scrollbar{width:12px}
+#settings-scroll::-webkit-scrollbar-track{background:#D6F5EE;border-radius:8px}
+#settings-scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#3FE0BF,var(--teal));border-radius:8px;border:2px solid #D6F5EE}
+
+/* ---------- 关卡地图 ---------- */
+#screen-map{padding-top:12px}
 .world-card{background:var(--paper);border-radius:24px;padding:16px 18px;margin-bottom:16px;
   border:4px solid var(--wc,#FFB020);box-shadow:0 8px 0 rgba(0,0,0,.07),0 14px 26px rgba(150,100,30,.14);
   position:relative;overflow:hidden;}
@@ -142,7 +157,7 @@ button:active{transform:scale(.94)}
   background:linear-gradient(160deg,#FFFFFF,#FFF4D8);
   border:5px solid var(--wcolor);border-radius:28px;padding:clamp(8px,1.6vh,16px) clamp(14px,3vw,30px);
   box-shadow:0 8px 0 rgba(0,0,0,.08),0 16px 30px rgba(150,100,30,.2);
-  animation:cardPop .5s cubic-bezier(.2,1.6,.4,1);max-width:94vw;}
+  animation:cardPop .5s cubic-bezier(.2,1.6,.4,1);max-width:94vw;flex:none;}
 @keyframes cardPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 #target-emoji{font-size:clamp(44px,8vw,74px);filter:drop-shadow(0 4px 4px rgba(0,0,0,.15));animation:emojiBob 2s ease-in-out infinite}
 @keyframes emojiBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -152,15 +167,15 @@ button:active{transform:scale(.94)}
   text-shadow:0 3px 0 #FFE1A8;}
 #target-word{font-size:clamp(14px,2.4vw,20px);color:var(--ink-soft);margin-top:4px;background:#FFF;border-radius:999px;padding:2px 14px;border:2px solid #F2D9A6}
 #speak-btn{width:clamp(52px,8vw,66px);height:clamp(52px,8vw,66px);border-radius:50%;font-size:clamp(24px,4vw,32px);
-  background:linear-gradient(180deg,#5FD9FF,var(--info));box-shadow:0 5px 0 #2379B8;color:#fff;border:3px solid #fff;}
+  background:linear-gradient(180deg,#5FD9FF,var(--info));box-shadow:0 5px 0 #2379B8;color:#fff;border:3px solid #fff;flex:none;}
 #speak-btn:active{box-shadow:0 1px 0 #2379B8}
-#game-tip{font-size:clamp(15px,2.6vw,20px);color:#8A5A20;text-shadow:0 1px 0 #fff}
+#game-tip{font-size:clamp(15px,2.6vw,20px);color:#8A5A20;text-shadow:0 1px 0 #fff;flex:none}
 #egg-zone{flex:1;width:100%;max-width:980px;display:flex;align-items:center;justify-content:center;position:relative;min-height:150px}
 #egg-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,34px);padding:10px 6px 26px}
 @media (pointer:fine){ #screen-game.cursor-hammer{cursor:none} #screen-game.cursor-hammer button{cursor:none} }
 
 .egg{position:relative;background:none;border:none;padding:0;width:clamp(96px,21vw,158px);
-  transform-origin:50% 92%;animation:eggDrop .55s cubic-bezier(.2,1.5,.4,1) backwards;}
+  transform-origin:50% 92%;animation:eggDrop .55s cubic-bezier(.2,1.5,.4,1) backwards;touch-action:manipulation;}
 @keyframes eggDrop{from{transform:translateY(-70px) scale(.6);opacity:0}to{transform:none;opacity:1}}
 .egg .shell{position:relative;z-index:2;transition:transform .38s cubic-bezier(.3,-.4,.6,1),opacity .38s;transform-origin:50% 80%}
 .egg svg{display:block;width:100%;height:auto}
@@ -191,6 +206,9 @@ button:active{transform:scale(.94)}
   transform:translate(-26%,-78%) rotate(-18deg);filter:drop-shadow(0 6px 6px rgba(0,0,0,.28));transition:opacity .2s}
 #hammer.swing{animation:swing .26s cubic-bezier(.3,.7,.4,1)}
 @keyframes swing{0%{transform:translate(-26%,-78%) rotate(-18deg)}40%{transform:translate(-30%,-70%) rotate(-92deg)}100%{transform:translate(-26%,-78%) rotate(-18deg)}}
+.strike-hammer{position:fixed;z-index:36;font-size:clamp(46px,9vw,64px);pointer-events:none;
+  transform:translate(-50%,-80%) rotate(-20deg);filter:drop-shadow(0 4px 5px rgba(0,0,0,.3));animation:strikeAnim .45s ease-out forwards}
+@keyframes strikeAnim{0%{opacity:0;transform:translate(-50%,-80%) rotate(-70deg) scale(1.35)}28%{opacity:1;transform:translate(-50%,-68%) rotate(12deg) scale(1)}55%{opacity:1;transform:translate(-50%,-72%) rotate(-6deg)}100%{opacity:0;transform:translate(-50%,-95%) rotate(-22deg) scale(.85)}}
 
 .praise{position:absolute;z-index:6;left:50%;top:6%;transform:translateX(-50%);pointer-events:none;
   font-size:clamp(26px,5vw,44px);color:#fff;padding:10px 28px;border-radius:999px;white-space:nowrap;
@@ -226,10 +244,6 @@ button:active{transform:scale(.94)}
 
 /* ---------- 贴纸册 ---------- */
 #screen-album{padding-top:12px}
-#album-scroll{width:100%;max-width:920px;flex:1;min-height:0;overflow-y:auto;padding:6px 10px 30px;scrollbar-width:thin;scrollbar-color:var(--grape) #EFE2FB}
-#album-scroll::-webkit-scrollbar{width:12px}
-#album-scroll::-webkit-scrollbar-track{background:#EFE2FB;border-radius:8px}
-#album-scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--pink),var(--grape));border-radius:8px;border:2px solid #EFE2FB}
 .album-world{margin-bottom:18px}
 .album-world h3{font-size:clamp(18px,3.2vw,24px);margin-bottom:8px;color:#7A4A12;text-shadow:0 1px 0 #fff}
 .album-grid{display:flex;flex-wrap:wrap;gap:10px}
@@ -243,9 +257,31 @@ button:active{transform:scale(.94)}
 .sticker.boing{animation:stickerBoing .5s cubic-bezier(.2,1.8,.4,1)}
 @keyframes stickerBoing{0%{transform:scale(1)}40%{transform:scale(1.22) rotate(-5deg)}100%{transform:scale(1)}}
 
+/* ---------- 设置中心 ---------- */
+#screen-settings{padding-top:12px}
+.set-group-title{font-size:clamp(17px,3vw,22px);color:#7A4A12;margin:14px 4px 10px;text-shadow:0 1px 0 #fff;display:flex;align-items:center;gap:8px}
+.set-row{display:flex;align-items:center;gap:14px;background:var(--paper);border:3px solid #FFE1A8;border-radius:20px;
+  padding:12px 16px;margin-bottom:12px;box-shadow:0 4px 0 #EAD9B4;flex-wrap:wrap}
+.set-label{flex:1;min-width:120px;font-size:clamp(16px,2.8vw,20px)}
+.set-label small{display:block;font-size:12px;color:var(--ink-soft);font-family:var(--ui-font)}
+.opt-group{display:flex;gap:8px;flex-wrap:wrap}
+.switch{position:relative;width:64px;height:34px;border-radius:999px;background:#D8CBB6;border:3px solid #C9BBA6;transition:.2s;flex:none;padding:0}
+.switch::after{content:'';position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:.2s}
+.switch.on{background:linear-gradient(180deg,#3FE0BF,var(--teal));border-color:var(--teal-deep)}
+.switch.on::after{left:32px}
+.switch:active{transform:scale(.94)}
+
+/* ---------- 确认弹窗 ---------- */
+#overlay-confirm{position:fixed;inset:0;z-index:55;display:none;align-items:center;justify-content:center;background:rgba(58,32,8,.55);backdrop-filter:blur(3px);padding:16px}
+#overlay-confirm.show{display:flex}
+#confirm-card{background:linear-gradient(170deg,#FFFDF4,#FFEFCA);border:6px solid var(--coral);border-radius:30px;padding:26px 30px;text-align:center;max-width:min(92vw,420px);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);animation:cardPop .4s cubic-bezier(.2,1.6,.4,1)}
+#confirm-text{font-size:clamp(18px,3.4vw,24px);margin-bottom:20px;line-height:1.4}
+#confirm-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
 #fx{position:fixed;inset:0;z-index:60;pointer-events:none}
 #toast{position:fixed;left:50%;bottom:5vh;transform:translateX(-50%);z-index:70;background:rgba(74,43,18,.92);color:#FFEFC9;
-  padding:10px 24px;border-radius:999px;font-size:18px;opacity:0;pointer-events:none;transition:.3s}
+  padding:10px 24px;border-radius:999px;font-size:18px;opacity:0;pointer-events:none;transition:.3s;max-width:90vw;text-align:center}
 #toast.show{opacity:1}
 
 @media (max-width:600px){
@@ -291,7 +327,7 @@ button:active{transform:scale(.94)}
 </div>
 
 <canvas id="fx"></canvas>
-<button id="soundBtn" aria-label="声音开关"><span class="ico">🔊</span><span id="soundLbl">声音开</span></button>
+<button id="soundBtn" aria-label="声音总开关"><span class="ico">🔊</span><span id="soundLbl">声音开</span></button>
 <div id="hammer">🔨</div>
 <div id="toast"></div>
 
@@ -316,16 +352,17 @@ button:active{transform:scale(.94)}
     <text x="146" y="46" font-size="30">✨</text>
   </svg>
   <h1 id="game-title">砸金蛋 · 认汉字</h1>
-  <p id="game-sub">🔨 砸开金蛋，找到字宝宝！36 个关卡等你闯关 🥚</p>
+  <p id="game-sub">🔨 砸开金蛋，找到字宝宝！🥚</p>
   <div id="home-stats">
     <span class="stat-chip">⭐ 星星 <b id="stat-stars">0</b></span>
     <span class="stat-chip">📖 认识 <b id="stat-chars">0</b> 个字</span>
-    <span class="stat-chip">🏆 通关 <b id="stat-levels">0</b>/36</span>
+    <span class="stat-chip">🏆 通关 <b id="stat-levels">0</b>/<b id="stat-total">0</b></span>
   </div>
   <div id="home-btns">
     <button class="big-btn" id="btn-play">▶️ 开始冒险</button>
     <button class="big-btn teal small" id="btn-map">🗺️ 选关卡</button>
     <button class="big-btn grape small" id="btn-album">📖 贴纸册</button>
+    <button class="big-btn gold small" id="btn-settings">⚙️ 设置</button>
   </div>
   <div id="diff-row">
     <span class="lbl">金蛋数量：</span>
@@ -340,8 +377,9 @@ button:active{transform:scale(.94)}
   <div class="top-bar">
     <button class="round-btn" id="map-back" aria-label="返回首页">🏠</button>
     <h2>🗺️ 选择关卡</h2>
+    <button class="round-btn" id="map-settings" aria-label="设置" style="font-size:22px">⚙️</button>
   </div>
-  <div id="map-scroll"></div>
+  <div id="map-scroll" class="scroll-area"></div>
 </section>
 
 <!-- 游戏 -->
@@ -374,7 +412,16 @@ button:active{transform:scale(.94)}
     <button class="round-btn" id="album-back" aria-label="返回">🏠</button>
     <h2>📖 我的汉字贴纸册</h2>
   </div>
-  <div id="album-scroll"></div>
+  <div id="album-scroll" class="scroll-area"></div>
+</section>
+
+<!-- 设置中心 -->
+<section class="screen" id="screen-settings">
+  <div class="top-bar">
+    <button class="round-btn" id="settings-back" aria-label="返回">🏠</button>
+    <h2>⚙️ 自定义设置</h2>
+  </div>
+  <div id="settings-scroll" class="scroll-area"></div>
 </section>
 
 <!-- 通关 -->
@@ -389,6 +436,17 @@ button:active{transform:scale(.94)}
       <button class="big-btn teal small" id="btn-replay">🔄 再玩一次</button>
       <button class="big-btn grape small" id="btn-tomap">🗺️ 选关卡</button>
       <button class="big-btn small" id="btn-next">➡️ 下一关</button>
+    </div>
+  </div>
+</div>
+
+<!-- 确认弹窗 -->
+<div id="overlay-confirm">
+  <div id="confirm-card">
+    <div id="confirm-text"></div>
+    <div id="confirm-btns">
+      <button class="big-btn teal small" id="confirm-no">取消</button>
+      <button class="big-btn danger small" id="confirm-yes">确认</button>
     </div>
   </div>
 </div>
@@ -439,6 +497,46 @@ const WORLDS = [
   {c:'衣',p:'yī',e:'👕',w:'衣服'},{c:'米',p:'mǐ',e:'🍚',w:'大米'},{c:'果',p:'guǒ',e:'🍎',w:'水果'},
   {c:'树',p:'shù',e:'🌳',w:'大树'},{c:'瓜',p:'guā',e:'🍉',w:'西瓜'},{c:'灯',p:'dēng',e:'💡',w:'电灯'}],
   levels:[[0,1,2],[3,4,5],[6,7,8],[0,5,7,8]]},
+ {name:'水果乐园',icon:'🍓',color:'#FF4D6D',chars:[
+  {c:'苹',p:'píng',e:'🍎',w:'苹果'},{c:'桃',p:'táo',e:'🍑',w:'桃子'},{c:'梨',p:'lí',e:'🍐',w:'梨子'},
+  {c:'橙',p:'chéng',e:'🍊',w:'橙子'},{c:'莓',p:'méi',e:'🍓',w:'草莓'},{c:'蕉',p:'jiāo',e:'🍌',w:'香蕉'},
+  {c:'柚',p:'yòu',e:'🍈',w:'柚子'},{c:'葡',p:'pú',e:'🍇',w:'葡萄'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,4,7]]},
+ {name:'蔬菜田园',icon:'🥬',color:'#6AB04C',chars:[
+  {c:'菜',p:'cài',e:'🥬',w:'白菜'},{c:'豆',p:'dòu',e:'🫘',w:'豆子'},{c:'茄',p:'qié',e:'🍆',w:'茄子'},
+  {c:'椒',p:'jiāo',e:'🌶️',w:'辣椒'},{c:'葱',p:'cōng',e:'🧅',w:'大葱'},{c:'蒜',p:'suàn',e:'🧄',w:'大蒜'},
+  {c:'姜',p:'jiāng',e:'🫚',w:'生姜'},{c:'薯',p:'shǔ',e:'🍠',w:'红薯'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,7,4]]},
+ {name:'美味食物',icon:'🍽️',color:'#F0932B',chars:[
+  {c:'包',p:'bāo',e:'🍞',w:'面包'},{c:'面',p:'miàn',e:'🍜',w:'面条'},{c:'饭',p:'fàn',e:'🍚',w:'米饭'},
+  {c:'汤',p:'tāng',e:'🍲',w:'喝汤'},{c:'糖',p:'táng',e:'🍬',w:'糖果'},{c:'饼',p:'bǐng',e:'🍪',w:'饼干'},
+  {c:'蛋',p:'dàn',e:'🥚',w:'鸡蛋'},{c:'茶',p:'chá',e:'🍵',w:'喝茶'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,4,6,7]]},
+ {name:'交通工具',icon:'🚦',color:'#22A6B3',chars:[
+  {c:'船',p:'chuán',e:'🚢',w:'轮船'},{c:'机',p:'jī',e:'✈️',w:'飞机'},{c:'轮',p:'lún',e:'🛞',w:'车轮'},
+  {c:'路',p:'lù',e:'🛣️',w:'马路'},{c:'桥',p:'qiáo',e:'🌉',w:'大桥'},{c:'站',p:'zhàn',e:'🚉',w:'车站'},
+  {c:'票',p:'piào',e:'🎫',w:'车票'},{c:'行',p:'xíng',e:'🚶',w:'行走'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,6,7]]},
+ {name:'美丽服饰',icon:'👗',color:'#BE2EDD',chars:[
+  {c:'帽',p:'mào',e:'🧢',w:'帽子'},{c:'鞋',p:'xié',e:'👟',w:'鞋子'},{c:'袜',p:'wà',e:'🧦',w:'袜子'},
+  {c:'裙',p:'qún',e:'👗',w:'裙子'},{c:'裤',p:'kù',e:'👖',w:'裤子'},{c:'巾',p:'jīn',e:'🧣',w:'围巾'},
+  {c:'伞',p:'sǎn',e:'☂️',w:'雨伞'},{c:'镜',p:'jìng',e:'🪞',w:'镜子'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,6,7]]},
+ {name:'学习用品',icon:'📚',color:'#4834D4',chars:[
+  {c:'书',p:'shū',e:'📖',w:'书本'},{c:'笔',p:'bǐ',e:'✏️',w:'铅笔'},{c:'纸',p:'zhǐ',e:'📄',w:'白纸'},
+  {c:'字',p:'zì',e:'🔤',w:'汉字'},{c:'画',p:'huà',e:'🎨',w:'画画'},{c:'琴',p:'qín',e:'🎹',w:'钢琴'},
+  {c:'球',p:'qiú',e:'⚽',w:'皮球'},{c:'棋',p:'qí',e:'♟️',w:'下棋'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,6,7]]},
+ {name:'天气季节',icon:'🌦️',color:'#30336B',chars:[
+  {c:'春',p:'chūn',e:'🌸',w:'春天'},{c:'夏',p:'xià',e:'☀️',w:'夏天'},{c:'秋',p:'qiū',e:'🍂',w:'秋天'},
+  {c:'冬',p:'dōng',e:'⛄',w:'冬天'},{c:'晴',p:'qíng',e:'🌞',w:'晴天'},{c:'阴',p:'yīn',e:'🌥️',w:'阴天'},
+  {c:'雷',p:'léi',e:'⛈️',w:'打雷'},{c:'电',p:'diàn',e:'⚡',w:'闪电'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,3,6,7]]},
+ {name:'美好品德',icon:'💝',color:'#EB4D4B',chars:[
+  {c:'爱',p:'ài',e:'❤️',w:'爱心'},{c:'笑',p:'xiào',e:'😄',w:'微笑'},{c:'哭',p:'kū',e:'😢',w:'哭泣'},
+  {c:'乐',p:'lè',e:'🎶',w:'快乐'},{c:'好',p:'hǎo',e:'👍',w:'好人'},{c:'友',p:'yǒu',e:'🤝',w:'朋友'},
+  {c:'帮',p:'bāng',e:'🤲',w:'帮助'},{c:'谢',p:'xiè',e:'🙏',w:'谢谢'}],
+  levels:[[0,1,2],[3,4,5],[6,7,0],[1,4,6,7]]},
  {name:'智慧闯关岛',icon:'🏆',color:'#FF5A8A',review:true,chars:[],
   levels:[null,null,null,null]}
 ];
@@ -449,34 +547,50 @@ const PRAISE=['太棒了！🎉','真厉害！🌟','好聪明！💖','答对�
 const OOPS=['再试试！💪','差一点点！🌈','加油加油！🍀'];
 
 /* ================= 存档 ================= */
-const SAVE_KEY='eggHanziSave_v1';
-let save={stars:new Array(TOTAL_LEVELS).fill(0),learned:[],diff:1,sound:true};
+const SAVE_KEY='eggHanziSave_v2';
+const DEFAULT_SAVE={stars:new Array(TOTAL_LEVELS).fill(0),learned:[],diff:1,rounds:3,hint:9000,
+  pinyin:true,word:true,autoRead:true,voice:true,music:true,sfx:true,speed:0,sound:true};
+let save=Object.assign({},DEFAULT_SAVE,{stars:new Array(TOTAL_LEVELS).fill(0),learned:[]});
 try{
-  const raw=localStorage.getItem(SAVE_KEY);
-  if(raw){const s=JSON.parse(raw);
-    if(Array.isArray(s.stars)) save.stars=new Array(TOTAL_LEVELS).fill(0).map((_,i)=>s.stars[i]||0);
-    if(Array.isArray(s.learned)) save.learned=s.learned;
-    if([0,1,2].includes(s.diff)) save.diff=s.diff;
-    if(typeof s.sound==='boolean') save.sound=s.sound;}
+  let s=null;
+  const raw2=localStorage.getItem(SAVE_KEY);
+  if(raw2)s=JSON.parse(raw2);
+  else{const raw1=localStorage.getItem('eggHanziSave_v1');if(raw1)s=JSON.parse(raw1);}
+  if(s){
+    if(Array.isArray(s.stars))save.stars=new Array(TOTAL_LEVELS).fill(0).map((_,i)=>s.stars[i]||0);
+    if(Array.isArray(s.learned))save.learned=s.learned.filter(c=>ALL_CHARS.some(ch=>ch.c===c));
+    if([0,1,2].includes(s.diff))save.diff=s.diff;
+    if([3,4,5].includes(s.rounds))save.rounds=s.rounds;
+    if([0,5000,9000,15000].includes(s.hint))save.hint=s.hint;
+    if([0,1].includes(s.speed))save.speed=s.speed;
+    ['pinyin','word','autoRead','voice','music','sfx','sound'].forEach(k=>{if(typeof s[k]==='boolean')save[k]=s[k];});
+  }
 }catch(e){}
 function persist(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(save))}catch(e){}}
 function unlockedIndex(){let i=0;while(i<TOTAL_LEVELS&&save.stars[i]>0)i++;return Math.min(i,TOTAL_LEVELS-1);}
 function levelWorld(idx){let n=0;for(let w=0;w<WORLDS.length;w++){if(idx<n+WORLDS[w].levels.length)return{w,l:idx-n};n+=WORLDS[w].levels.length;}return{w:0,l:0};}
 function globalIndex(w,l){let n=0;for(let i=0;i<w;i++)n+=WORLDS[i].levels.length;return n+l;}
 
-/* ================= 音效引擎 ================= */
+/* ================= 音效引擎（分通道） ================= */
 const AudioFX={
-  ctx:null,master:null,musicGain:null,musicTimer:null,step:0,nextTime:0,
+  ctx:null,master:null,musicGain:null,sfxGain:null,musicTimer:null,step:0,nextTime:0,
   init(){
     if(this.ctx){if(this.ctx.state==='suspended')this.ctx.resume().catch(()=>{});return;}
     try{
       const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
       this.ctx=new AC();
       this.master=this.ctx.createGain();this.master.gain.value=save.sound?1:0;this.master.connect(this.ctx.destination);
-      this.musicGain=this.ctx.createGain();this.musicGain.gain.value=.16;this.musicGain.connect(this.master);
+      this.musicGain=this.ctx.createGain();this.musicGain.gain.value=save.music?.16:0;this.musicGain.connect(this.master);
+      this.sfxGain=this.ctx.createGain();this.sfxGain.gain.value=save.sfx?1:0;this.sfxGain.connect(this.master);
       this.nextTime=this.ctx.currentTime+.1;
       this.musicTimer=setInterval(()=>this.schedule(),120);
     }catch(e){}
+  },
+  applySettings(){
+    if(!this.ctx)return;
+    this.master.gain.setTargetAtTime(save.sound?1:0,this.ctx.currentTime,.05);
+    this.musicGain.gain.setTargetAtTime(save.music?.16:0,this.ctx.currentTime,.05);
+    this.sfxGain.gain.setTargetAtTime(save.sfx?1:0,this.ctx.currentTime,.05);
   },
   setEnabled(on){
     if(this.master)this.master.gain.setTargetAtTime(on?1:0,this.ctx.currentTime,.05);
@@ -489,7 +603,7 @@ const AudioFX={
       o.type=type;o.frequency.setValueAtTime(freq,t);
       if(to)o.frequency.exponentialRampToValueAtTime(to,t+dur);
       g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
-      o.connect(g);g.connect(dest||this.master);o.start(t);o.stop(t+dur+.05);
+      o.connect(g);g.connect(dest||this.sfxGain);o.start(t);o.stop(t+dur+.05);
     }catch(e){}
   },
   noise(dur,vol,freq){
@@ -501,7 +615,7 @@ const AudioFX={
       const src=this.ctx.createBufferSource();src.buffer=buf;
       const f=this.ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=freq;f.Q.value=.8;
       const g=this.ctx.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
-      src.connect(f);f.connect(g);g.connect(this.master);src.start(t);
+      src.connect(f);f.connect(g);g.connect(this.sfxGain);src.start(t);
     }catch(e){}
   },
   click(){this.tone(660,.09,{type:'triangle',vol:.22,to:990})},
@@ -513,13 +627,12 @@ const AudioFX={
   star(i){this.tone(780+i*180,.3,{type:'triangle',vol:.3});this.tone(1560+i*360,.24,{type:'sine',vol:.12,when:.03})},
   fanfare(){[523,659,784,1047,784,1047,1319].forEach((f,i)=>this.tone(f,.32,{type:'triangle',vol:.24,when:i*.13}));
     this.tone(262,.9,{type:'sine',vol:.14,when:.1});},
-  /* 音乐盒背景旋律：五声音阶，轻柔循环 */
   MELODY:[72,0,76,79, 81,0,79,76, 74,0,76,74, 72,0,67,0,
           72,0,76,79, 81,0,84,81, 79,76,74,76, 72,0,0,0],
   BASS:[48,0,0,0, 45,0,0,0, 50,0,0,0, 43,0,0,0,
         48,0,0,0, 45,0,0,0, 50,0,0,0, 48,0,0,0],
   schedule(){
-    if(!this.ctx||!save.sound)return;
+    if(!this.ctx||!save.sound||!save.music)return;
     const STEP=.32;
     while(this.nextTime<this.ctx.currentTime+.4){
       const i=this.step%32,m=this.MELODY[i],b=this.BASS[i],t=this.nextTime-this.ctx.currentTime;
@@ -531,7 +644,8 @@ const AudioFX={
     }
   }
 };
-document.addEventListener('pointerdown',()=>AudioFX.init(),{passive:true});
+let lastPointerType='mouse';
+document.addEventListener('pointerdown',e=>{AudioFX.init();lastPointerType=e.pointerType||'mouse';},{passive:true});
 
 /* ================= 语音 ================= */
 let zhVoice=null;
@@ -540,19 +654,19 @@ function pickVoice(){try{
   zhVoice=vs.find(v=>/Natural|Online/i.test(v.name))||vs.find(v=>/Xiaoxiao|Xiaoyi|Yunxi/i.test(v.name))||vs.find(v=>/zh[-_]CN/i.test(v.lang))||vs[0]||null;
 }catch(e){}}
 if('speechSynthesis' in window){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
-function speak(text,rate=.78){
-  if(!save.sound||!('speechSynthesis' in window))return;
+function speak(text){
+  if(!save.sound||!save.voice||!('speechSynthesis' in window))return;
   try{
     speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(text);
-    u.lang='zh-CN';u.rate=rate;u.pitch=1.15;u.volume=1;
+    u.lang='zh-CN';u.rate=save.speed===0?.7:.85;u.pitch=1.15;u.volume=1;
     if(zhVoice)u.voice=zhVoice;
     speechSynthesis.speak(u);
   }catch(e){}
 }
-/* 预录神经语音优先；素材缺失时降级到浏览器语音 */
 const Voice={
   els:{},cur:null,seq:[],fallback:null,broken:false,
+  rate(){return save.speed===0?.9:1;},
   get(key){
     const src=window.VOICE_MANIFEST&&window.VOICE_MANIFEST[key];
     if(!src)return null;
@@ -564,7 +678,7 @@ const Voice={
   warm(keys){if(!this.broken)keys.forEach(k=>this.get(k));},
   play(keys,fallback){
     this.stop();
-    if(!save.sound||this.broken)return false;
+    if(!save.sound||!save.voice||this.broken)return false;
     const list=(Array.isArray(keys)?keys:[keys]).map(k=>this.get(k)).filter(Boolean);
     if(!list.length)return false;
     this.seq=list;this.fallback=fallback||null;
@@ -573,7 +687,7 @@ const Voice={
       const a=this.seq.shift();
       if(!a){this.cur=null;return;}
       this.cur=a;a.onended=next;a.onerror=fail;
-      try{a.currentTime=0}catch(e){}
+      try{a.currentTime=0;a.playbackRate=this.rate();}catch(e){}
       const p=a.play();
       if(p&&p.catch)p.catch(err=>{if(err&&err.name==='NotSupportedError')fail();});
     };
@@ -581,7 +695,7 @@ const Voice={
   }
 };
 function say(keys,fallback){
-  if(!save.sound)return;
+  if(!save.sound||!save.voice)return;
   if(Voice.play(keys,fallback))return;
   speak(fallback);
 }
@@ -640,13 +754,16 @@ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show')
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
 function setWorldTint(color){document.documentElement.style.setProperty('--wcolor',color);}
+let confirmCb=null;
+function showConfirm(text,cb){$('confirm-text').textContent=text;confirmCb=cb;$('overlay-confirm').classList.add('show');}
+$('confirm-no').addEventListener('click',()=>{AudioFX.click();$('overlay-confirm').classList.remove('show');confirmCb=null;});
+$('confirm-yes').addEventListener('click',()=>{AudioFX.click();$('overlay-confirm').classList.remove('show');const cb=confirmCb;confirmCb=null;if(cb)cb();});
 
-/* 背景小星星 */
 (function(){const bg=$('world-bg');for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';
   s.textContent=['✦','✧','⋆'][i%3];s.style.left=(4+Math.random()*92)+'vw';s.style.top=(4+Math.random()*55)+'vh';
   s.style.fontSize=(10+Math.random()*16)+'px';s.style.animationDelay=(Math.random()*3)+'s';bg.appendChild(s);}})();
 
-/* ================= 声音开关 ================= */
+/* ================= 声音总开关 ================= */
 function renderSound(){const b=$('soundBtn');b.classList.toggle('off',!save.sound);
   b.querySelector('.ico').textContent=save.sound?'🔊':'🔇';$('soundLbl').textContent=save.sound?'声音开':'声音关';}
 $('soundBtn').addEventListener('click',()=>{save.sound=!save.sound;persist();AudioFX.init();AudioFX.setEnabled(save.sound);
@@ -658,6 +775,8 @@ function renderHome(){
   $('stat-stars').textContent=save.stars.reduce((a,b)=>a+b,0);
   $('stat-chars').textContent=save.learned.length;
   $('stat-levels').textContent=save.stars.filter(s=>s>0).length;
+  $('stat-total').textContent=TOTAL_LEVELS;
+  $('game-sub').textContent=`🔨 砸开金蛋，找到字宝宝！${TOTAL_LEVELS} 个关卡 · ${ALL_CHARS.length} 个汉字 🥚`;
   document.querySelectorAll('.diff-pill').forEach(p=>p.classList.toggle('sel',+p.dataset.diff===save.diff));
 }
 document.querySelectorAll('.diff-pill').forEach(p=>p.addEventListener('click',()=>{
@@ -668,11 +787,15 @@ document.querySelectorAll('.diff-pill').forEach(p=>p.addEventListener('click',()
 $('btn-play').addEventListener('click',()=>{AudioFX.click();startLevel(unlockedIndex());});
 $('btn-map').addEventListener('click',()=>{AudioFX.click();openMap();});
 $('btn-album').addEventListener('click',()=>{AudioFX.click();openAlbum('home');});
+$('btn-settings').addEventListener('click',()=>{AudioFX.click();openSettings('home');});
 $('map-back').addEventListener('click',()=>{AudioFX.click();renderHome();showScreen('screen-home');});
+$('map-settings').addEventListener('click',()=>{AudioFX.click();openSettings('map');});
 $('game-back').addEventListener('click',()=>{AudioFX.click();clearHint();openMap();});
 $('game-restart').addEventListener('click',()=>{AudioFX.click();startLevel(game.levelIdx);});
 $('album-back').addEventListener('click',()=>{AudioFX.click();
   if(albumFrom==='map')openMap();else{renderHome();showScreen('screen-home');}});
+$('settings-back').addEventListener('click',()=>{AudioFX.click();
+  if(settingsFrom==='map')openMap();else{renderHome();showScreen('screen-home');}});
 
 /* ================= 地图 ================= */
 function openMap(){
@@ -717,7 +840,7 @@ function openAlbum(from){
     w.chars.forEach(ch=>{
       const known=save.learned.includes(ch.c);
       const b=document.createElement('button');b.className='sticker'+(known?'':' unknown');
-      b.innerHTML=known?`<span class="st-e">${ch.e}</span><span class="st-c">${ch.c}</span><span class="st-p">${ch.p}</span>`
+      b.innerHTML=known?`<span class="st-e">${ch.e}</span><span class="st-c">${ch.c}</span>${save.pinyin?`<span class="st-p">${ch.p}</span>`:''}`
         :`<span class="st-e">❔</span><span class="st-c">?</span><span class="st-p">加油</span>`;
       if(known)b.addEventListener('click',()=>{AudioFX.pop();b.classList.remove('boing');void b.offsetWidth;b.classList.add('boing');
         say('word_'+ch.c,`${ch.c}！${ch.w}。`);
@@ -727,6 +850,56 @@ function openAlbum(from){
     sec.appendChild(grid);box.appendChild(sec);
   });
   showScreen('screen-album');
+}
+
+/* ================= 设置中心 ================= */
+let settingsFrom='home';
+function openSettings(from){settingsFrom=from;clearHint();renderSettings();showScreen('screen-settings');}
+function renderSettings(){
+  const box=$('settings-scroll');box.innerHTML='';
+  const groupTitle=(icon,text)=>{const d=document.createElement('div');d.className='set-group-title';d.innerHTML=`${icon} ${text}`;box.appendChild(d);};
+  const row=(label,desc)=>{const r=document.createElement('div');r.className='set-row';
+    r.innerHTML=`<div class="set-label">${label}${desc?`<small>${desc}</small>`:''}</div>`;box.appendChild(r);return r;};
+  const pills=(r,options,get,set)=>{const g=document.createElement('div');g.className='opt-group';
+    options.forEach(o=>{const b=document.createElement('button');b.className='opt-pill'+(get()===o.v?' sel':'');b.textContent=o.t;
+      b.addEventListener('click',()=>{set(o.v);persist();AudioFX.click();renderSettings();if(o.say)say(o.say.k,o.say.f);else toast('已保存');});
+      g.appendChild(b);});r.appendChild(g);};
+  const toggle=(r,label,desc,key,onChange)=>{const rr=row(label,desc);
+    const s=document.createElement('button');s.className='switch'+(save[key]?' on':'');s.setAttribute('role','switch');s.setAttribute('aria-checked',save[key]);
+    s.addEventListener('click',()=>{save[key]=!save[key];persist();AudioFX.click();s.classList.toggle('on',save[key]);s.setAttribute('aria-checked',save[key]);
+      if(onChange)onChange();toast(save[key]?'已开启':'已关闭');});
+    rr.appendChild(s);};
+
+  groupTitle('🎯','学习难度');
+  pills(row('金蛋数量','每回合砸几个蛋'),[{v:0,t:'🌱 3个'},{v:1,t:'⭐ 4个'},{v:2,t:'🚀 5个'}],
+    ()=>save.diff,v=>save.diff=v);
+  pills(row('每关字数','一关认识几个字'),[{v:3,t:'3个'},{v:4,t:'4个'},{v:5,t:'5个'}],
+    ()=>save.rounds,v=>save.rounds=v);
+  pills(row('提示等待','多久没答对就闪烁提示'),[{v:0,t:'关闭'},{v:5000,t:'5秒'},{v:9000,t:'9秒'},{v:15000,t:'15秒'}],
+    ()=>save.hint,v=>save.hint=v);
+
+  groupTitle('🗣️','朗读与显示');
+  pills(row('语音语速','真人语音的快慢'),[{v:0,t:'🐢 慢速'},{v:1,t:'🐇 正常'}],
+    ()=>save.speed,v=>save.speed=v);
+  toggle(null,'自动朗读题目','进入回合自动读字','autoRead');
+  toggle(null,'显示拼音','字宝宝上方显示拼音','pinyin');
+  toggle(null,'显示组词','字宝宝下方显示词语','word');
+
+  groupTitle('🔊','声音');
+  toggle(null,'真人语音','朗读汉字与提示','voice',()=>{if(!save.voice)Voice.stop();});
+  toggle(null,'背景音乐','轻柔音乐盒旋律','music',()=>AudioFX.applySettings());
+  toggle(null,'游戏音效','砸蛋、奖励等声音','sfx',()=>AudioFX.applySettings());
+
+  groupTitle('💾','学习数据');
+  const rr=row('重置学习进度','清空星星与贴纸（保留设置）');
+  const btn=document.createElement('button');btn.className='big-btn danger small';btn.textContent='🗑️ 重置进度';
+  btn.addEventListener('click',()=>{AudioFX.click();showConfirm('确定要清空所有星星和贴纸吗？此操作无法撤销。',()=>{
+    save.stars=new Array(TOTAL_LEVELS).fill(0);save.learned=[];persist();renderHome();toast('学习进度已重置');
+  });});
+  rr.appendChild(btn);
+  const info=document.createElement('div');info.style.cssText='text-align:center;color:var(--ink-soft);font-size:14px;margin:16px 0';
+  info.innerHTML=`已认识 <b>${save.learned.length}</b> / ${ALL_CHARS.length} 个字 · 获得 <b>${save.stars.reduce((a,b)=>a+b,0)}</b> 颗星 · 共 ${TOTAL_LEVELS} 关`;
+  box.appendChild(info);
 }
 
 /* ================= 游戏核心 ================= */
@@ -758,10 +931,11 @@ const NEST_SVG=`
 function clearHint(){clearTimeout(game.hintTimer);game.hintTimer=null;}
 function armHint(){
   clearHint();
+  if(!save.hint)return;
   game.hintTimer=setTimeout(()=>{
     const egg=document.querySelector(`#egg-row .egg:not(.open)[data-c="${game.target.c}"]`);
-    if(egg){egg.classList.add('hint');speakPrompt();}
-  },9000);
+    if(egg){egg.classList.add('hint');if(save.autoRead)speakPrompt();}
+  },save.hint);
 }
 function speakPrompt(){
   const t=game.target;
@@ -769,7 +943,7 @@ function speakPrompt(){
   say('prompt_'+t.c,fb);
 }
 function renderDots(){
-  $('round-dots').innerHTML=[0,1,2].map(i=>`<span>${i<game.round?'🐣':'🥚'}</span>`).join('');
+  $('round-dots').innerHTML=Array.from({length:save.rounds},(_,i)=>`<span>${i<game.round?'🐣':'🥚'}</span>`).join('');
 }
 function renderStarMeter(){
   const spans=$('star-meter').children;
@@ -789,18 +963,19 @@ function startLevel(idx){
   setWorldTint(world.color);
   $('hud-title').textContent=`${world.icon} ${world.name} · 第${l+1}关`;
   if(world.review){
-    game.pool=shuffle(ALL_CHARS).slice(0,6);
+    game.pool=shuffle(ALL_CHARS).slice(0,Math.max(6,save.rounds+1));
   }else{
     game.pool=world.levels[l].map(i=>world.chars[i]);
   }
-  game.targets=shuffle(game.pool).slice(0,3);
+  const sh=shuffle(game.pool);
+  game.targets=Array.from({length:save.rounds},(_,i)=>sh[i%sh.length]);
   renderStarMeter();
   $('overlay-complete').classList.remove('show');
   showScreen('screen-game');
   if(finePointer)$('screen-game').classList.add('cursor-hammer');
   Voice.warm(game.pool.flatMap(ch=>['prompt_'+ch.c,'word_'+ch.c,'char_'+ch.c]));
   buildRound();
-  setTimeout(()=>say('sys_level'+(l+1),`第${l+1}关开始啦！`),150);
+  if(save.autoRead)setTimeout(()=>say('sys_level'+(l+1),`第${l+1}关开始啦！`),150);
 }
 
 function distractorPool(){
@@ -818,8 +993,10 @@ function buildRound(){
   const t=game.target;
   $('target-emoji').textContent=t.e;
   $('target-pinyin').textContent=t.p;
+  $('target-pinyin').style.display=save.pinyin?'':'none';
   $('target-hanzi').textContent=t.c;
   $('target-word').textContent=t.w;
+  $('target-word').style.display=save.word?'':'none';
   const card=$('target-card');card.style.animation='none';void card.offsetWidth;card.style.animation='';
   const n=EGG_COUNTS[save.diff];
   const chars=shuffle([t,...shuffle(distractorPool()).slice(0,n-1)]);
@@ -831,17 +1008,18 @@ function buildRound(){
     b.innerHTML=`<div class="prize">${ch.c}</div>
       <div class="shell"><div class="wobble" style="animation-delay:${(Math.random()*2.4).toFixed(2)}s">${EGG_SVG}</div></div>
       <div class="nest">${NEST_SVG}</div>`;
-    b.addEventListener('click',()=>tapEgg(b,ch));
+    b.addEventListener('click',ev=>tapEgg(b,ch,ev));
     row.appendChild(b);
   });
-  setTimeout(speakPrompt,650);
+  if(save.autoRead)setTimeout(speakPrompt,650);
   armHint();
 }
 
-function tapEgg(btn,ch){
+function tapEgg(btn,ch,ev){
   if(game.busy||btn.classList.contains('open'))return;
   game.busy=true;clearHint();
   swingHammer();
+  if(ev&&lastPointerType!=='mouse')strikeHammer(ev.clientX,ev.clientY);
   AudioFX.whoosh();
   btn.classList.add('cracked');
   setTimeout(()=>AudioFX.crack(),110);
@@ -862,7 +1040,7 @@ function tapEgg(btn,ch){
       say(['praise_'+pi,'word_'+ch.c],`${PRAISE[pi]}${ch.c}，${ch.w}！`);
       game.round++;renderDots();
       setTimeout(()=>{
-        if(game.round>=3)completeLevel();
+        if(game.round>=save.rounds)completeLevel();
         else buildRound();
       },1700);
     }else{
@@ -897,7 +1075,7 @@ function completeLevel(){
   });
   const banner=$('unlock-banner');
   const isWorldEnd=l===WORLDS[w].levels.length-1;
-  if(idx===TOTAL_LEVELS-1){banner.style.display='inline-block';banner.textContent='🏆 全部 36 关通关！你是汉字小达人！';}
+  if(idx===TOTAL_LEVELS-1){banner.style.display='inline-block';banner.textContent=`🏆 全部 ${TOTAL_LEVELS} 关通关！你是汉字小达人！`;}
   else if(isWorldEnd&&newUnlocked>prevUnlocked){banner.style.display='inline-block';
     banner.textContent=`🎊 解锁新世界：${WORLDS[w+1].icon} ${WORLDS[w+1].name}！`;}
   else banner.style.display='none';
@@ -912,7 +1090,7 @@ $('btn-tomap').addEventListener('click',()=>{AudioFX.click();$('overlay-complete
 $('btn-next').addEventListener('click',()=>{AudioFX.click();startLevel(Math.min(game.levelIdx+1,TOTAL_LEVELS-1));});
 $('speak-btn').addEventListener('click',()=>{AudioFX.click();speakPrompt();armHint();});
 
-/* ================= 锤子指针 ================= */
+/* ================= 锤子指针 / 触屏敲击 ================= */
 const finePointer=matchMedia('(pointer:fine)').matches;
 const hammer=$('hammer');
 if(finePointer){
@@ -925,6 +1103,12 @@ if(finePointer){
 function swingHammer(){
   if(finePointer){hammer.classList.remove('swing');void hammer.offsetWidth;hammer.classList.add('swing');}
 }
+function strikeHammer(x,y){
+  const s=document.createElement('div');s.className='strike-hammer';s.textContent='🔨';
+  s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);
+  setTimeout(()=>s.remove(),480);
+}
+document.addEventListener('contextmenu',e=>{if(e.target.closest('#screen-game,.egg'))e.preventDefault();});
 
 /* ================= 启动 ================= */
 renderHome();

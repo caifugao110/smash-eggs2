@@ -1,0 +1,30 @@
+{
+  "name": "smash-eggs2",
+  "version": "1.0.0",
+  "description": "砸金蛋·认汉字 — 面向 3-6 岁小朋友的汉字启蒙网页小游戏，140 字 / 68 关 / 真人语音 / 触屏 / 自定义设置。",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "voice": "node gen_phrases.mjs && python gen_voice.py"
+  },
+  "keywords": [
+    "game",
+    "hanzi",
+    "chinese",
+    "education",
+    "kids",
+    "html5",
+    "web-audio",
+    "touch"
+  ],
+  "author": "caifugao110",
+  "license": "MIT",
+  "homepage": "https://github.com/caifugao110/smash-eggs2#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caifugao110/smash-eggs2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/caifugao110/smash-eggs2/issues"
+  }
+}
